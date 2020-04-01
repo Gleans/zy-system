@@ -2,11 +2,9 @@ package com.zyut.system.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.zyut.system.model.common.ResultBean;
-import com.zyut.system.model.dto.Menu;
 import com.zyut.system.model.dto.Role;
 import com.zyut.system.model.dto.User;
 import com.zyut.system.model.vo.UserInfoVO;
-import com.zyut.system.service.MenuService;
 import com.zyut.system.service.RoleService;
 import com.zyut.system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +29,7 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value = "get", method = RequestMethod.GET)
-    public ResultBean<IPage<User>> getUser(UserInfoVO user) {
+    public ResultBean<IPage<UserInfoVO>> getUser(UserInfoVO user) {
         return ResultBean.success(userService.getList(user));
     }
 
@@ -39,6 +37,12 @@ public class UserController {
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public ResultBean<Boolean> addUser(@RequestBody UserInfoVO user) {
         return ResultBean.success(userService.addUser(user));
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "update", method = RequestMethod.POST)
+    public ResultBean<Boolean> updateUser(@RequestBody UserInfoVO user) {
+        return ResultBean.success(userService.updateUser(user));
     }
 
     @RequestMapping(value = "login", method = RequestMethod.GET)
@@ -56,5 +60,11 @@ public class UserController {
         List<Role> menuList = roleService.list();
         modelAndView.addObject("menuList", menuList);
         return modelAndView;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "del-user", method = RequestMethod.GET)
+    public ResultBean<Boolean> delUser(Integer userId) {
+        return ResultBean.success(userService.removeById(userId));
     }
 }

@@ -46,15 +46,6 @@ public class LoginServiceImpl implements LoginService {
         }
 
         UserInfoVO userInfoVO = user.toVO();
-        if (roleNameSet.contains("admin")) {
-            userInfoVO.setAuth("admin");
-        } else if (roleNameSet.contains("dean")) {
-            userInfoVO.setAuth("dean");
-        } else if (roleNameSet.contains("teacher")) {
-            userInfoVO.setAuth("teacher");
-        } else {
-            userInfoVO.setAuth("index");
-        }
 
         return userInfoVO;
     }

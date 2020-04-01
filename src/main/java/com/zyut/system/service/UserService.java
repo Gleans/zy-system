@@ -11,7 +11,9 @@ public interface UserService extends IService<User> {
 
     User getUserByUserName(String name);
 
-    IPage<User> getList(UserInfoVO user);
+    IPage<UserInfoVO> getList(UserInfoVO user);
 
     boolean addUser(UserInfoVO user);
+
+    boolean updateUser(UserInfoVO user);
 }

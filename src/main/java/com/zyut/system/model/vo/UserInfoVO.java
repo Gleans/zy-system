@@ -23,10 +23,11 @@ public class UserInfoVO extends PageVO<User> {
     private String password;
     private String sex;               //性别
 
-    private String auth;               //性别
+    private String phone;               //性别
 
     private String email;
 
     List<Integer> roleList;
+    private String roleListStr;
 
 }

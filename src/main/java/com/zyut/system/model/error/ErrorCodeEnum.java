@@ -11,6 +11,7 @@ public enum ErrorCodeEnum {
     // 系统
     LOGIN_ERROR(1005, "登录失败!"),
     USER_ERROR(1006, "用户名或者密码错误!"),
+    USERNAME_UNQ(1007, "用户名不能重复!"),
     ;
 
     private final int code;

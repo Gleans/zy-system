@@ -14,13 +14,14 @@
 </head>
 
 <body>
-    <h1>用户管理</h1>
-    <br>
-    <hr />
-    <button type="button" class="layui-btn layui-btn-normal" onclick="create_user()">新增</button>
-    <button type="button" class="layui-btn" onclick="edit_user()">修改</button>
-    <button type="button" class="layui-btn layui-btn-danger">删除</button>
-    <table id="demo" lay-filter="test" lay-data="{id: 'userTest'}"></table>
+<h1>用户管理</h1>
+<br>
+<hr/>
+<button type="button" class="layui-btn layui-btn-normal" onclick="create_user()">新增</button>
+<button type="button" class="layui-btn" onclick="edit_user()">修改</button>
+<button type="button" class="layui-btn layui-btn-danger" onclick="del_user()">删除</button>
+<button type="button" class="layui-btn layui-btn-primary" onclick="refresh()">刷新</button>
+<table id="demo" lay-filter="test" lay-data="{id: 'userTest'}"></table>
 
 
 </body>
@@ -82,6 +83,7 @@
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>
+        <input type="hidden" name="userId"/>
     </form>
 </div>
 <script type="text/javascript" src="../js/jquery.min.js"></script>
