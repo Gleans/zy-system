@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!-- 配置包扫描器 -->
+    <context:component-scan base-package="com.zyut.system"/>
+    <!-- 启用spring mvc 注解 配置注解驱动 -->
+    <mvc:annotation-driven/>
+
+    <!-- 自动装配 -->
+    <context:component-scan base-package="com.zyut.system" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <context:include-filter type="annotation"
+                                expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+    </context:component-scan>
+
+    <!--视图解析器-->
+<!--    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+<!--        &lt;!&ndash;前缀&ndash;&gt;-->
+<!--        <property name="prefix" value="/WEB-INF/"/>-->
+<!--        &lt;!&ndash;后缀&ndash;&gt;-->
+<!--        <property name="suffix" value=".jsp"/>-->
+<!--    </bean>-->
+
+    <!-- 文件上传 -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 默认编码 -->
+        <property name="defaultEncoding" value="utf-8"/>
+        <!-- 文件大小最大值 -->
+        <property name="maxUploadSize" value="10485760000"/>
+        <!-- 内存中的最大值 -->
+        <property name="maxInMemorySize" value="40960"/>
+    </bean>
+
+    <!--启用该标签代表 spring mvc 不拦截css、js、jpg等相关的静态资源-->
+
+    <mvc:resources location="/img/" mapping="/img/**"/>
+    <mvc:resources location="/js/" mapping="/js/**"/>
+    <mvc:resources location="/css/" mapping="/css/**"/>
+    <mvc:resources location="/layui/" mapping="/layui/**"/>
+<!--    <mvc:default-servlet-handler/>-->
+
+    <aop:aspectj-autoproxy/>
+    <bean id="controllerAop" class="com.zyut.system.aop.ControllerAOP"/>
+    <aop:config>
+        <aop:aspect id="myAop" ref="controllerAop">
+            <aop:pointcut id="target"
+                          expression="execution(public com.zyut.system.model.common.* *(..))"/>
+            <aop:around method="handlerControllerMethod" pointcut-ref="target"/>
+        </aop:aspect>
+    </aop:config>
+
+    <bean
+            class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <property name="order" value="1" />
+        <property name="mediaTypes">
+            <map>
+                <entry key="json" value="application/json" />
+                <entry key="xml" value="application/xml" />
+                <entry key="htm" value="text/html" />
+            </map>
+        </property>
+
+        <property name="defaultViews">
+            <list>
+                <!-- JSON View -->
+                <bean
+                        class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+                </bean>
+            </list>
+        </property>
+        <property name="ignoreAcceptHeader" value="true" />
+    </bean>
+
+    <!-- 上面没匹配到则会使用这个视图解析器 -->
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+
+        <property name="order" value="2" />
+
+        <property name="prefix" value="/WEB-INF/views/" />
+
+        <property name="suffix" value=".jsp" />
+
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+
+    </bean>
+
+</beans>

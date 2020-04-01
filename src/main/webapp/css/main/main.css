@@ -1,0 +1,20 @@
+.container {
+    display: flex;
+}
+
+.header {
+    height : calc(8vh);
+    padding: 0;
+}
+
+.side {
+    height   : calc(92vh);
+    width    : 20%;
+    min-width: 180px;
+}
+
+.container .content {
+    height : calc(80vh);
+    width  : 79%;
+    padding: 10px;
+}
