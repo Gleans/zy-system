@@ -19,11 +19,18 @@
   
   <select id="getRoleByUserId" resultMap="BaseResultMap">
      select
-        <include refid="Base_Column_List"></include>
+        <include refid="Base_Column_List"/>
     from role ro
         where  exists(
                     select  role_id from  user_role where  user_id = #{userId}
                  )
     and  is_delete = 'N'
   </select>
+    <select id="query" resultType="com.zyut.system.model.vo.RoleVO">
+        select
+         *
+        FROM role
+
+        ${ew.customSqlSegment}
+    </select>
 </mapper>
