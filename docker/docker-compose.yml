@@ -1,0 +1,15 @@
+version: '2'
+services:
+  zy-system:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    ports:
+      - 8080:8080
+    extra_hosts:
+      - "tools-jdbc:172.17.0.1"
+      - "tools-docker:172.17.0.1"
+    restart: always
+    container_name: zy-system
+    hostname: tools-docker
+    image: house
