@@ -50,6 +50,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         QueryWrapper<UserInfoVO> ew = new QueryWrapper<>();
         ew.orderByDesc("uu.user_id");
         ew.groupBy("uu.user_id");
+
+        // 分角色
+        if (ObjectUtil.isNotNull(user.getRoleId())) {
+            ew.eq("ur.role_id", user.getRoleId());
+        }
+
         IPage<UserInfoVO> userInfoVOIPage = baseMapper.query(new Page<>(user.getPage(), user.getLimit()), ew);
         if (ObjectUtil.isNotEmpty(userInfoVOIPage.getRecords())) {
             userInfoVOIPage.getRecords().forEach(userInfoVO -> {
@@ -76,7 +82,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if (ObjectUtil.isNotNull(tempUser)) {
             throw new CustomException(ErrorCodeEnum.USERNAME_UNQ);
         }
-
         // 新增用户
         boolean addUser = this.save(userIn);
 

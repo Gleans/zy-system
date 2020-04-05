@@ -1,26 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zyut.system.dao.MenuMapper">
-  <resultMap id="BaseResultMap" type="com.zyut.system.model.dto.Menu">
-    <!--@mbg.generated-->
-    <!--@Table menu-->
-    <id column="menu_id" jdbcType="INTEGER" property="menuId" />
-    <result column="id" jdbcType="INTEGER" property="id" />
-    <result column="label" jdbcType="VARCHAR" property="label" />
-    <result column="path" jdbcType="VARCHAR" property="path" />
-    <result column="pid" jdbcType="INTEGER" property="pid" />
-    <result column="type" jdbcType="VARCHAR" property="type" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    menu_id, id, `label`, `path`, pid, `type`
-  </sql>
+    <resultMap id="BaseResultMap" type="com.zyut.system.model.dto.Menu">
+        <!--@mbg.generated-->
+        <!--@Table menu-->
+        <id column="menu_id" jdbcType="INTEGER" property="menuId"/>
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="label" jdbcType="VARCHAR" property="label"/>
+        <result column="path" jdbcType="VARCHAR" property="path"/>
+        <result column="pid" jdbcType="INTEGER" property="pid"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        menu_id, id, `label`, `path`, pid, `type`
+    </sql>
     <select id="getList" resultType="com.zyut.system.model.vo.MenuVO">
-      select
-       <include refid="Base_Column_List"/>
-      from menu mu
-        where exists(
-            select  um.menu_id from  user_menu um where um.menu_id = mu.menu_id and um.user_id = #{userId}
-      )
+        SELECT mu.menu_id,
+               mu.id,
+               mu.`label`,
+               mu.`path`,
+               mu.pid,
+               mu.`type`
+        FROM menu mu
+                 LEFT JOIN role_menu r ON mu.id = r.menu_id
+        WHERE EXISTS(
+                      SELECT ur.role_id
+                      FROM user_role ur
+                      WHERE EXISTS(
+                                    SELECT u.user_id FROM `user` u WHERE u.user_id = #{userId} AND u.is_delete = 'N'
+                                )
+                  )
     </select>
 </mapper>

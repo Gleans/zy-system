@@ -31,8 +31,8 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public UserInfoVO authLogin(String username, String password) {
         LambdaQueryWrapper<User> lqw = Wrappers.<User>lambdaQuery()
-                .eq(User::getUsername, username)
                 .eq(User::getPassword, password);
+        lqw.and(l -> l.eq(User::getUsername, username).or().eq(User::getUserId, username));
         User user = userService.getOne(lqw);
 
         if (ObjectUtil.isNull(user)) {
@@ -41,6 +41,7 @@ public class LoginServiceImpl implements LoginService {
 
         List<Role> roleList = roleMapper.getRoleByUserId(user.getUserId());
         Set<String> roleNameSet = new HashSet<>();
+
         for (Role role : roleList) {
             roleNameSet.add(role.getRoleKey());
         }

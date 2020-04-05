@@ -28,9 +28,9 @@
 
 <div id="create" style="display: none;">
     <form class="layui-form" lay-filter="userForm">
-        <center>
+        <div style="text-align: center;">
             <h3>新增用户</h3>
-        </center>
+        </div>
         <br>
         <hr />
         <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->

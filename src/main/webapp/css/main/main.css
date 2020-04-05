@@ -1,20 +1,24 @@
 .container {
     display: flex;
+    height: calc(100% - 60px)
 }
 
 .header {
-    height : calc(8vh);
+    height: 60px;
     padding: 0;
 }
 
 .side {
-    height   : calc(92vh);
-    width    : 20%;
+    height: 100%;
+    width: 20%;
     min-width: 180px;
 }
 
 .container .content {
-    height : calc(80vh);
-    width  : 79%;
+    width: 100%;
     padding: 10px;
+}
+
+.layui-nav-tree {
+    width: auto !important;
 }

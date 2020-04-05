@@ -30,4 +30,6 @@ public class UserInfoVO extends PageVO<User> {
     List<Integer> roleList;
     private String roleListStr;
 
+    private Long roleId;
+
 }

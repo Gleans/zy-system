@@ -1,3 +1,4 @@
+var session = window.sessionStorage
 $(function () {
     var layer = layui.layer
     /*判断上次是否勾选记住密码和自动登录*/
@@ -50,6 +51,7 @@ $(function () {
             success: function (res) {
                 if (res.code === 0) {
                     layer.msg('登录成功,等待跳转...', {icon: 6});
+                    session.setItem("userName", res.data.username)
                     setTimeout(function(){
                         console.log("登录成功,等待跳转...")
                     }, 3000 )

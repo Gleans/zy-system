@@ -12,7 +12,7 @@
         <lombok.version>1.18.8</lombok.version>
         <hutool.version>5.2.5</hutool.version>
         <!-- mysql驱动版本号 -->
-        <mysql-driver.version>5.1.44</mysql-driver.version>
+        <mysql-driver.version>8.0.19</mysql-driver.version>
         <!-- 阿里数据库连接池版本号 -->
         <druid.version>1.1.5</druid.version>
         <!-- fastjson版本号 -->
@@ -30,6 +30,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
+        <mybaitsplus.version>3.2.0</mybaitsplus.version>
     </properties>
 
     <dependencies>
@@ -103,20 +104,6 @@
             <artifactId>hutool-all</artifactId>
             <version>5.2.5</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
-        <!--        <dependency>-->
-        <!--            <groupId>javax.servlet</groupId>-->
-        <!--            <artifactId>javax.servlet-api</artifactId>-->
-        <!--            <version>3.1.0</version>-->
-        <!--            <scope>provided</scope>-->
-        <!--        </dependency>-->
-
-        <!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus -->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus</artifactId>
-            <version>3.1.2</version>
-        </dependency>
 
         <!-- 添加日志相关jar包 -->
         <dependency>
@@ -136,11 +123,6 @@
         </dependency>
 
         <!-- JSP -->
-        <!--        <dependency>-->
-        <!--            <groupId>jstl</groupId>-->
-        <!--            <artifactId>jstl</artifactId>-->
-        <!--            <version>${jstl.version}</version>-->
-        <!--        </dependency>-->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
@@ -153,6 +135,12 @@
             <version>1.2</version>
         </dependency>
 
+        <!-- Mybatis-Plus -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus</artifactId>
+            <version>3.2.0</version>
+        </dependency>
 
         <!-- 添加mysql驱动依赖 -->
         <dependency>
@@ -169,11 +157,10 @@
 
         <!-- 添加数据库连接池依赖 -->
         <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>${druid.version}</version>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>2.7.6</version>
         </dependency>
-
 
         <!-- fastjson -->
         <dependency>
