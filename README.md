@@ -4,14 +4,19 @@
 
 ## 使用技术
 
-springmvc
-jsp
-layui
-maven
+- springmvc
+- jsp(古老的巅峰)
+- layui
+- maven
+- mybatis plus
 
 附加：docker
 
 ## 页面图
 
-![111](img/1.jpg)
+![111](img/微信截图_20200419212921.png)
+![111](img/微信截图_20200419213522.png)
+![111](img/微信截图_20200419213541.png)
+![111](img/微信截图_20200419213604.png)
+![111](img/微信截图_20200419213614.png)
 
